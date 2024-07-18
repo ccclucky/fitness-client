@@ -21,7 +21,6 @@
     "lint:eslint": "eslint --fix --ext .js,.ts,.vue ./src",
     "lint:format": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,vue,html,md}\"",
     "lint:style": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
-    "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
     "prepare": "husky install",
     "p": "plop"
   },
@@ -89,6 +88,7 @@
     "husky": "^9.0.10",
     "inquirer": "^9.2.14",
     "less": "^4.2.0",
+    "less-loader": "^12.2.0",
     "lint-staged": "^15.2.2",
     "plop": "^4.0.1",
     "postcss": "^8.4.34",

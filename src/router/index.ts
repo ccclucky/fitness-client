@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { App } from 'vue'
-import { Layout, getParentLayout } from '@/utils/routerHelper'
+import { Layout } from '@/utils/routerHelper'
 import { useI18n } from '@/hooks/web/useI18n'
 
 const { t } = useI18n()
@@ -10,7 +10,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    redirect: '/level',
+    redirect: '/dashboard',
     name: 'Root',
     meta: {
       hidden: true
@@ -57,60 +57,198 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
-    path: '/level',
+    path: '/dashboard',
     component: Layout,
-    redirect: '/level/menu1/menu1-1/menu1-1-1',
-    name: 'Level',
+    name: 'Dashboard',
     meta: {
-      title: t('router.level'),
+      title: '仪表盘',
+      icon: 'carbon:dashboard'
+    }
+  },
+  {
+    path: '/permission',
+    component: Layout,
+    name: 'Permission',
+    meta: {
+      title: '权限模块',
+      icon: 'carbon:user-role'
+    },
+    children: [
+      {
+        path: 'admin',
+        name: 'Admin',
+        component: () => import('@/views/Permission/Admin.vue'),
+        meta: {
+          title: '管理员',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
+        path: 'coach',
+        name: 'Coach',
+        component: () => import('@/views/Permission/Coach.vue'),
+        meta: {
+          title: '教练',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
+        path: 'student',
+        name: 'Student',
+        component: () => import('@/views/Permission/Student.vue'),
+        meta: {
+          title: '学员',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
+        path: 'menu',
+        name: 'Menu',
+        component: () => import('@/views/Permission/Menu.vue'),
+        meta: {
+          title: '菜单管理',
+          icon: 'carbon:user-role'
+        }
+      }
+    ]
+  },
+  {
+    path: '/finance',
+    component: Layout,
+    name: 'Finance',
+    meta: {
+      title: '财务管理',
+      icon: 'carbon:user-role'
+    },
+    children: [
+      {
+        path: 'course',
+        name: 'Course',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '课程销量',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
+        path: 'coach-finance',
+        name: 'coach-finance',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '教练提成',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
+        path: 'corporate-finance',
+        name: 'Corporate Finance',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '公司财务',
+          icon: 'carbon:user-role'
+        }
+      }
+    ]
+  },
+  {
+    path: '/resource',
+    component: Layout,
+    name: '资源管理',
+    meta: {
+      title: '资源管理',
+      icon: 'carbon:user-role'
+    },
+    children: [
+      {
+        path: 'course-list',
+        name: '课程信息',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '课程信息',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
+        path: 'gym',
+        name: '健身房信息',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '健身房信息',
+          icon: 'carbon:user-role'
+        }
+      }
+    ]
+  },
+  {
+    path: '/log',
+    component: Layout,
+    name: '日志模块',
+    meta: {
+      title: '日志模块',
+      icon: 'carbon:user-role'
+    },
+    children: [
+      {
+        path: 'operation',
+        name: '基础日志',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '基础日志',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
+        path: 'clock',
+        name: '打卡日志',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '打卡日志',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
+        path: 'order',
+        name: '订单日志',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '订单日志',
+          icon: 'carbon:user-role'
+        }
+      },
+      {
+        path: 'error',
+        name: '异常日志',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '异常日志',
+          icon: 'carbon:user-role'
+        }
+      }
+    ]
+  },
+  {
+    path: '/system',
+    component: Layout,
+    name: '基本信息',
+    meta: {
+      title: '基本信息',
       icon: 'carbon:skill-level-advanced'
     },
     children: [
       {
-        path: 'menu1',
-        name: 'Menu1',
-        component: getParentLayout(),
-        redirect: '/level/menu1/menu1-1/menu1-1-1',
-        meta: {
-          title: t('router.menu1')
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            name: 'Menu11',
-            component: getParentLayout(),
-            redirect: '/level/menu1/menu1-1/menu1-1-1',
-            meta: {
-              title: t('router.menu11'),
-              alwaysShow: true
-            },
-            children: [
-              {
-                path: 'menu1-1-1',
-                name: 'Menu111',
-                component: () => import('@/views/Level/Menu111.vue'),
-                meta: {
-                  title: t('router.menu111')
-                }
-              }
-            ]
-          },
-          {
-            path: 'menu1-2',
-            name: 'Menu12',
-            component: () => import('@/views/Level/Menu12.vue'),
-            meta: {
-              title: t('router.menu12')
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        name: 'Menu2',
+        path: 'base-config',
+        name: '基础设置',
         component: () => import('@/views/Level/Menu2.vue'),
         meta: {
-          title: t('router.menu2')
+          title: '基础设置'
+        }
+      },
+      {
+        path: 'info',
+        name: '系统设置',
+        component: () => import('@/views/Level/Menu2.vue'),
+        meta: {
+          title: '系统设置'
         }
       }
     ]
@@ -126,6 +264,7 @@ const router = createRouter({
 
 export const resetRouter = (): void => {
   const resetWhiteNameList = ['Redirect', 'Login', 'NoFind', 'Root']
+  console.log(router)
   router.getRoutes().forEach((route) => {
     const { name } = route
     if (name && !resetWhiteNameList.includes(name as string)) {
@@ -135,6 +274,7 @@ export const resetRouter = (): void => {
 }
 
 export const setupRouter = (app: App<Element>) => {
+  console.log(router.getRoutes())
   app.use(router)
 }
 

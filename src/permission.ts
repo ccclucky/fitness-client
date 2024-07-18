@@ -31,6 +31,7 @@ router.beforeEach(async (to, from, next) => {
       const roleRouters = userStore.getRoleRouters || []
 
       // 是否使用动态路由
+      appStore.setDynamicRouter(false)
       if (appStore.getDynamicRouter) {
         appStore.serverDynamicRouter
           ? await permissionStore.generateRoutes('server', roleRouters as AppCustomRouteRecordRaw[])

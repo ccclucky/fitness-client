@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAppStore } from '@/store/modules/app'
-import { ConfigGlobal } from '@/components/ConfigGlobal'
 import { useDesign } from '@/hooks/web/useDesign'
+import { useAppStore } from '@/store/modules/app'
+import { computed } from 'vue'
+import { ConfigGlobal } from '@/components/ConfigGlobal'
 
 const { getPrefixCls } = useDesign()
 
